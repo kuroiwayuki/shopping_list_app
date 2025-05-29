@@ -58,5 +58,5 @@ end
 
 gem "tailwindcss-rails"
 gem "tailwindcss-ruby", "3.4.17"
-gem 'inline_svg'
-gem 'bcrypt', '~> 3.1.7'
+gem "inline_svg"
+gem "bcrypt", "~> 3.1.7"
