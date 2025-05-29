@@ -17,19 +17,13 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
-<body class="grid min-h-[100lvh] grid-rows-[auto_1fr_auto]">
-  <!-- ヘッダー -->
-  <% if logged_in? %>
-  <%= render "shared/header" %>
-  <% else %>
-      <%= render 'shared/before_login_header' %>
-  <% end %>
-  <!-- メイン -->
-  <main class="flex items-center justify-center min-h-screen py-12">
-  <%= yield %>
-</main>
+<body class="flex flex-col min-h-screen">
+  <%= render 'shared/header' %>
 
-  <!-- フッター -->
-  <%= render "shared/footer" %>
+  <main class="flex-1 py-12 bg-blue-50">
+    <%= yield %>
+  </main>
+
+  <%= render 'shared/footer' %>
 </body>
 </html>

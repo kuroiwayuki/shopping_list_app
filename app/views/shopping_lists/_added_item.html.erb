@@ -1,0 +1,8 @@
+<%= turbo_stream.append "added-items" do %>
+  <div class="p-2 border rounded">
+    <p><strong><%= @item.name %></strong> - 数量: <%= @quantity %></p>
+    <% if @recently_purchased %>
+      <div class="text-sm text-red-600">⚠️ 最近購入済み</div>
+    <% end %>
+  </div>
+<% end %>

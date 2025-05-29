@@ -1,0 +1,19 @@
+<div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <h3 class="text-xl font-Retro text-gray-800 dark:text-white mb-2">📦 <%= shopping_list.title %></h3>
+
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">👤 <%= shopping_list.user.name %></p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">📅 <%= l(shopping_list.created_at, format: :short) %></p>
+
+        <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">🛒 商品内容:</p>
+        <ul class="pl-4 mb-4 list-disc text-gray-600 dark:text-gray-400 text-sm">
+          <% shopping_list.shopping_list_items.each do |sli| %>
+            <li><%= sli.item.name %>（<%= sli.quantity %><%= sli.item.unit %>）</li>
+          <% end %>
+        </ul>
+
+        <div class="flex justify-end gap-3">
+          <%= link_to "詳細", '#', class: "text-blue-600 hover:underline text-sm" %>
+          <%= link_to "編集", '#',class: "text-yellow-600 hover:underline text-sm" %>
+          <%= link_to "削除", '#', method: :delete, data: { confirm: "削除しますか？" }, class: "text-red-600 hover:underline text-sm" %>
+        </div>
+      </div>
