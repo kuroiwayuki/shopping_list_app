@@ -25,7 +25,9 @@
       </div>
 
       <div class="flex justify-center md:block space-x-4">
-        <%= link_to 'ログアウト', logout_path , data: { turbo_method: :delete },class: "px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" %>
+        <%= link_to '新規登録', new_user_path, class: "px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" %>
+
+        <%= link_to 'ログイン', login_path, class: "px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" %>
       </div>
     </div>
   </div>
