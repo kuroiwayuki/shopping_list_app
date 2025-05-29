@@ -85,6 +85,7 @@ GEM
     brakeman (7.0.2)
       racc
     builder (3.3.0)
+    byebug (12.0.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -105,6 +106,8 @@ GEM
     drb (2.2.3)
     erb (5.0.1)
     erubi (1.13.1)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     faraday (2.13.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -201,6 +204,9 @@ GEM
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    pry-byebug (3.11.0)
+      byebug (~> 12.0)
+      pry (>= 0.13, < 0.16)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
     psych (5.2.6)
@@ -363,10 +369,12 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  faker
   inline_svg
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
+  pry-byebug
   pry-rails
   puma (>= 5.0)
   rails (~> 7.2.2, >= 7.2.2.1)

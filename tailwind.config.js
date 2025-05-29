@@ -7,5 +7,11 @@ module.exports = {
     safelist: [
     
     ],
+    theme: {
+      extend: {},
+      fontFamily: {
+        zenKurenaido: ['Zen Kurenaido', 'sans-serif']
+      }
+    }
   }
   

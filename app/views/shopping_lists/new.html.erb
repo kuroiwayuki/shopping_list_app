@@ -1,0 +1,29 @@
+<div class="max-w-3xl mx-auto overflow-hidden bg-white rounded-lg shadow-md ">
+<%= form_with model: @shopping_list, url: add_item_shopping_lists_path, method: :post, data: { turbo_stream: true }, local: false do |f| %>
+  <div class="mb-4">
+    <%= f.label :title, "リストのタイトル" %>
+    <%= f.text_field :title, class: "border rounded p-2 w-full" %>
+  </div>
+
+  <%= f.fields_for :shopping_list_items do |item_fields| %>
+    <div class="mb-4 p-4 border rounded">
+      <div>
+        <%= item_fields.label :item_id, "アイテム" %>
+        <%= item_fields.collection_select :item_id, Item.all, :id, :name, prompt: "選択" %>
+      </div>
+
+      <div>
+        <%= item_fields.label :quantity, "数量" %>
+        <%= item_fields.number_field :quantity, class: "border rounded p-1 w-20" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mt-4">
+    <%= f.submit "カートに追加", class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+  </div>
+<% end %>
+
+  <%# 追加した要素をturbo.streamで表示 %>
+  <div id="added-items" class="mt-4 space-y-2"></div>
+</div>
