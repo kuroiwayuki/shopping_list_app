@@ -4,5 +4,9 @@
     <% if @recently_purchased %>
       <div class="text-sm text-red-600">⚠️ 最近購入済み</div>
     <% end %>
+
+    <%= hidden_field_tag "shopping_list[shopping_list_items_attributes][][item_id]", @item.id %>
+    <%= hidden_field_tag "shopping_list[shopping_list_items_attributes][][quantity]", @quantity %>
   </div>
 <% end %>
+
