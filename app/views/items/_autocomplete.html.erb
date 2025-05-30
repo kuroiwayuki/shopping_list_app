@@ -1,0 +1,5 @@
+<% @items.each do |item| %>
+  <li data-id="<%= item.id %>" data-text="<%= item.name %>">
+    <%= item.name %>
+  </li>
+<% end %>

@@ -2,22 +2,32 @@
   <% if flash[:notice] %>
   <div class="alert alert-success"><%= notice %></div>
 <% end %>
+
   <%# カート追加 %>
 <%= form_with model: @shopping_list, url: add_item_shopping_lists_path, method: :post, data: { turbo_stream: true }, local: false do |f| %>
 
   <%= f.fields_for :shopping_list_items do |item_fields| %>
-    <div class="mb-4 p-4 border rounded">
-      <div>
-        <%= item_fields.label :item_id, "アイテム" %>
-        <%= item_fields.collection_select :item_id, Item.all, :id, :name, prompt: "選択" %>
-      </div>
+  <div class="mb-4 p-4 border rounded">
+    <div data-controller="item-autocomplete">
+      <%= item_fields.label :item_id, "商品名" %>
+      <input type="text"
+             data-item-autocomplete-target="input"
+             data-action="input->item-autocomplete#search"
+             placeholder="商品名を入力"
+             class="border rounded p-1 w-full" />
 
-      <div>
-        <%= item_fields.label :quantity, "数量" %>
-        <%= item_fields.number_field :quantity, class: "border rounded p-1 w-20" %>
-      </div>
+      <%= item_fields.hidden_field :item_id, data: { item_autocomplete_target: "hidden" } %>
+
+      <ul data-item-autocomplete-target="results"
+          class="border bg-white absolute z-50 mt-1 rounded shadow w-full"></ul>
     </div>
-  <% end %>
+
+    <div>
+      <%= item_fields.label :quantity, "数量" %>
+      <%= item_fields.number_field :quantity, class: "border rounded p-1 w-20" %>
+    </div>
+  </div>
+<% end %>
 
   <div class="mt-4">
     <%= f.submit "カートに追加", class: "bg-blue-600 text-white px-4 py-2 rounded" %>

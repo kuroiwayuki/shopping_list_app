@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   resources :shopping_lists do
     post :add_item, on: :collection
   end
+  resources :items do
+    collection do
+      get :autocomplete
+    end
+  end
   get "login", to: "user_sessions#new"
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
