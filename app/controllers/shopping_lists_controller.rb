@@ -14,7 +14,6 @@ class ShoppingListsController < ApplicationController
     if @shopping_list.save
       redirect_to new_shopping_list_path,notice: "作成完了✍️"
     end
-
   end
   def edit;end
   def update;end
