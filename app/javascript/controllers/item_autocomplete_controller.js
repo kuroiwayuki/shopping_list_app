@@ -9,6 +9,7 @@ export default class extends Controller {
     clearTimeout(this.timeout)
 
     const query = this.inputTarget.value.trim()
+    console.log(query , "💩")
     if (query.length < 1) {
       this.resultsTarget.innerHTML = ""
       return
