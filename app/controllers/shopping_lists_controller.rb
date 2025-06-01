@@ -15,8 +15,34 @@ class ShoppingListsController < ApplicationController
       redirect_to new_shopping_list_path,notice: "作成完了✍️"
     end
   end
-  def edit;end
-  def update;end
+  def show
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    
+  end
+
+  def edit
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+  end
+  def update
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    binding.pry
+    if @shopping_list.update(shopping_list_params)
+      redirect_to shopping_list_path(@shopping_list)
+    else
+      render edit, notice: "もう一度オネシャス🙇"
+    end
+
+  end
+
+  def destroy
+    @shopping_list = current_user.shopping_lists.find(params[:id])
+    if @shopping_list.destroy
+      render index,notice: "削除したにょーん✌️"
+    else
+      render index,notice: "失敗したにょん、、、、😭"
+    end
+    
+  end
 
   def add_item
     data = shopping_list_params
@@ -37,7 +63,7 @@ class ShoppingListsController < ApplicationController
   def shopping_list_params
     params.require(:shopping_list).permit(
       :title,
-      shopping_list_items_attributes: [:item_id, :quantity]
+      shopping_list_items_attributes: [:id, :item_id, :quantity, :_destroy]
     )
   end
 end
