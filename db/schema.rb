@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_29_044340) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_01_134534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,9 +42,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_29_044340) do
   create_table "shopping_list_items", force: :cascade do |t|
     t.bigint "shopping_list_id", null: false
     t.bigint "item_id", null: false
-    t.integer "quantity"
-    t.boolean "checked"
-    t.string "note"
+    t.integer "quantity", null: false
+    t.boolean "checked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_shopping_list_items_on_item_id"
@@ -52,7 +51,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_29_044340) do
   end
 
   create_table "shopping_lists", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,13 +59,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_29_044340) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "items", "categories"
