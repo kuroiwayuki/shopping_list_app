@@ -12,12 +12,11 @@ class ShoppingListsController < ApplicationController
   def create
     @shopping_list = current_user.shopping_lists.build(shopping_list_params)
     if @shopping_list.save
-      redirect_to new_shopping_list_path,notice: "作成完了✍️"
+      redirect_to new_shopping_list_path, notice: "作成完了✍️"
     end
   end
   def show
     @shopping_list = current_user.shopping_lists.find(params[:id])
-    
   end
 
   def edit
@@ -31,27 +30,25 @@ class ShoppingListsController < ApplicationController
     else
       render edit, notice: "もう一度オネシャス🙇"
     end
-
   end
 
   def destroy
     @shopping_list = current_user.shopping_lists.find(params[:id])
     if @shopping_list.destroy
-      render index,notice: "削除したにょーん✌️"
+      render index, notice: "削除したにょーん✌️"
     else
-      render index,notice: "失敗したにょん、、、、😭"
+      render index, notice: "失敗したにょん、、、、😭"
     end
-    
   end
 
   def add_item
     data = shopping_list_params
-  
+
     item_params = data[:shopping_list_items_attributes].values.first
     @item = Item.find(item_params[:item_id])
     @quantity = item_params[:quantity].to_i
     @recently_purchased = PurchaseHistory.exists?(user: current_user, item: @item)
-  
+
     respond_to do |format|
       format.turbo_stream
     end
@@ -63,10 +60,7 @@ class ShoppingListsController < ApplicationController
   def shopping_list_params
     params.require(:shopping_list).permit(
       :title,
-      shopping_list_items_attributes: [:id, :item_id, :quantity, :_destroy]
+      shopping_list_items_attributes: [ :id, :item_id, :quantity, :_destroy ]
     )
   end
 end
-
-
-
