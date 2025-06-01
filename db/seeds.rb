@@ -1,7 +1,12 @@
 require 'faker'
 
-user = User.first
-raise "⚠️ Userが存在しません。先に1人作成してください。" unless user
+user = User.first_or_create!(
+  name: "Seed User",
+  email: "seed@example.com",
+  password: "password",
+  password_confirmation: "password"
+)
+
 
 puts "==== 🛒 テストデータ生成開始 ===="
 

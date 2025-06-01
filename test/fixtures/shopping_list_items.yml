@@ -5,11 +5,9 @@ one:
   item: one
   quantity: 1
   checked: false
-  note: MyString
 
 two:
   shopping_list: two
   item: two
   quantity: 1
   checked: false
-  note: MyString
