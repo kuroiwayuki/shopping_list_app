@@ -5,6 +5,7 @@ class ShoppingListsController < ApplicationController
   end
 
   def new
+    binding.pry
     @shopping_list = ShoppingList.new
     @shopping_list.shopping_list_items.build
   end
