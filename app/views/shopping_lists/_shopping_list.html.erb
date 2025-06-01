@@ -12,8 +12,8 @@
         </ul>
 
         <div class="flex justify-end gap-3">
-          <%= link_to "詳細", '#', class: "text-blue-600 hover:underline text-sm" %>
-          <%= link_to "編集", '#',class: "text-yellow-600 hover:underline text-sm" %>
-          <%= link_to "削除", '#', method: :delete, data: { confirm: "削除しますか？" }, class: "text-red-600 hover:underline text-sm" %>
+          <%= link_to "詳細", shopping_list_path(shopping_list) , class: "text-blue-600 hover:underline text-sm" %>
+          <%= link_to "編集", shopping_list_path(shopping_list),class: "text-yellow-600 hover:underline text-sm" %>
+          <%= link_to "削除", shopping_list_path(shopping_list),  method: :delete,data: { turbo: false, confirm: "削除しますか？" }, class: "text-red-600 hover:underline text-sm" %>
         </div>
       </div>

@@ -1,0 +1,33 @@
+<div class="flex items-center justify-between flex-col pt-20 pb-[120px]">
+  <div class="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+
+    <div class="mt-2">
+      <h2 class="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline" tabindex="0" role="link">
+        <%= @shopping_list.title %>
+      </h2>
+
+      <% if @shopping_list.shopping_list_items.any? %>
+        <ul class="mt-2 list-disc list-inside text-gray-600 dark:text-gray-300">
+          <% @shopping_list.shopping_list_items.each do |item| %>
+            <li class="flex items-center gap-2">
+        <input type="checkbox" abled <%= "checked" if item.checked %> class="form-checkbox text-blue-600">
+        <span><%= item.item.name %>（数量: <%= item.quantity %>）</span>
+      </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="mt-2 text-gray-500 dark:text-gray-400">
+          登録された商品はありません。
+        </p>
+      <% end %>
+    </div>
+
+    <div class="flex items-center mt-10 gap-4">
+      <%= link_to '編集', edit_shopping_list_path(@shopping_list),
+          class: "px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" %>
+
+      <%= link_to '戻る', shopping_lists_path,
+          class: "px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" %>
+    </div>
+  </div>
+</div>

@@ -15,7 +15,7 @@ categories.each do |category|
   5.times do
     item = Item.find_or_create_by!(
       name: Faker::Food.unique.ingredient,
-      unit: ["個", "本", "袋", "g", "ml"].sample,
+      unit: [ "個", "本", "袋", "g", "ml" ].sample,
       category: category
     )
     items << item
@@ -38,11 +38,11 @@ end
       shopping_list: list,
       item: item,
       quantity: rand(1..5),
-      checked: [true, false].sample
+      checked: [ true, false ].sample
     )
 
     # 購入履歴も一部生成（50%の確率）
-    if [true, false].sample
+    if [ true, false ].sample
       PurchaseHistory.create!(
         user: user,
         item: item,
