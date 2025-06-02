@@ -1,32 +1,48 @@
 <nav class="relative bg-white shadow dark:bg-gray-800">
   <div class="container px-6 py-4 mx-auto flex justify-between items-center">
+    
+    <!-- ロゴ部分 -->
     <div class="flex items-center">
       <%= link_to root_path do %>
         <%= inline_svg_tag "heroicons-outline/shopping-cart-icon-header.svg", class: "w-6 h-6 text-white", alt: "Logo" %>
       <% end %>
     </div>
-    
-    <div data-controller = "hamburger">
 
-      <button data-action="click->hamburger#open" 
-              data-hamburger-target = "button"
-              class="bg-blue-600 rounded-lg text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-    <div>
-              <%= inline_svg_tag "heroicons-outline/hamburger_icon.svg", class: "w-6 h-6 text-white", alt: "Logo" %>
-    </div>
-  </button>
+    <!-- トップリンク + ハンバーガーを横並びに -->
+    <div class="flex items-center space-x-4" data-controller="hamburger">
+      
+      <!-- トップリンク -->
+      <%= link_to "新規登録", '#', class: "bg-white border-4 border-blue-400 rounded-lg text-blue px-4 py-2 hover:bg-blue-700" %>
+      <%= link_to "ログインはこちら", '#', class: "bg-white border-4 border-blue-400 rounded-lg text-blue px-4 py-2 hover:bg-blue-700" %>
+      <!-- ハンバーガーメニュー開ボタン -->
+      <button
+        data-action="click->hamburger#open"
+        data-hamburger-target="button"
+        class="bg-blue-600 p-2 rounded-lg text-white hover:bg-blue-700"
+      >
+        <%= inline_svg_tag "heroicons-outline/hamburger_icon.svg", class: "w-6 h-6", alt: "メニュー" %>
+      </button>
 
-    <div data-hamburger-target = "results" class="hidden flex flex-col space-y-4 mt-12">
-      <button data-action="click->hamburger#close" 
-              data-hamburger-target = "button" 
-              class="bg-blue-600 rounded-lg text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400">
-    閉じる
-  </button>
-      <%= link_to "トップ", '#', class: "text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400" %>
-      <%= link_to "買い物リスト一覧", shopping_lists_path, class: "text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400" %>
-      <%= link_to "買い物リスト作成", new_shopping_list_path, class: "text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400" %>
-    </div>
-    </div>
+
+  <!-- ハンバーガーメニュー（初期は非表示） -->
+  <div
+    data-hamburger-target="results"
+    class="hidden flex flex-col items-start px-6 space-y-4 mt-4"
+  >
+    <!-- 閉じるボタン -->
+    <button
+      data-action="click->hamburger#close"
+      data-hamburger-target="button"
+      class="bg-blue-600 rounded-lg text-white px-4 py-2 hover:bg-blue-700"
+    >
+      閉じる
+    </button>
+
+    <!-- メニュー項目 -->
+    <%= link_to "トップ", '#', class: "text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400" %>
+    <%= link_to "買い物リスト一覧", shopping_lists_path, class: "text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400" %>
+    <%= link_to "買い物リスト作成", new_shopping_list_path, class: "text-gray-700 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400" %>
   </div>
   </div>
+   </div>
 </nav>
