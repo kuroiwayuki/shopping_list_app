@@ -17,7 +17,6 @@ class ShoppingListsController < ApplicationController
   end
   def show
     @shopping_list = current_user.shopping_lists.find(params[:id])
-   
   end
 
   def edit
@@ -43,9 +42,9 @@ class ShoppingListsController < ApplicationController
 
   def add_item
     data = shopping_list_params
-    
+
     item_params = data[:shopping_list_items_attributes].values.first
-     # エラー起きてるのでチェック必要
+    # エラー起きてるのでチェック必要
     @item = Item.find_by(name: item_params[:item_name])
     @quantity = item_params[:quantity].to_i
     @recently_purchased = PurchaseHistory.exists?(user: current_user, item: @item)
