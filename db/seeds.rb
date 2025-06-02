@@ -1,60 +1,23 @@
-require 'faker'
+user = User.find_by(email: "yuki8050@icloud.com")
 
-user = User.first_or_create!(
-  name: "Seed User",
-  email: "seed@example.com",
-  password: "password",
-  password_confirmation: "password"
-)
+if user
+  # 必要なカテゴリを先に作成（または検索）
+  vegetables = Category.find_or_create_by!(name: "野菜")
 
+  # アイテムをカテゴリと一緒に作成
+  item1 = Item.find_or_create_by!(name: "にんじん", category: vegetables)
+  item2 = Item.find_or_create_by!(name: "たまねぎ", category: vegetables)
 
-puts "==== 🛒 テストデータ生成開始 ===="
-
-# --- カテゴリ作成 ---
-category_names = %w[果物 野菜 肉 魚 飲料 日用品]
-categories = category_names.map { |name| Category.find_or_create_by!(name: name) }
-
-# --- アイテム作成（カテゴリごとに5件ずつ） ---
-items = []
-categories.each do |category|
-  5.times do
-    item = Item.find_or_create_by!(
-      name: Faker::Food.unique.ingredient,
-      unit: [ "個", "本", "袋", "g", "ml" ].sample,
-      category: category
-    )
-    items << item
-  end
-end
-
-# --- 買い物リスト作成（10件） ---
-10.times do |i|
-  list = ShoppingList.create!(
-    title: "リスト#{i + 1}：#{Faker::Lorem.word}",
-    user: user,
-    created_at: Faker::Date.backward(days: 30)
+  # ショッピングリストを作成
+  shopping_list = user.shopping_lists.create!(
+    title: "テスト買い物リスト",
+    shopping_list_items_attributes: [
+      { item: item1, quantity: 2 },
+      { item: item2, quantity: 1 }
+    ]
   )
 
-  # 各リストに3〜5個のアイテムを追加
-  rand(3..5).times do
-    item = items.sample
-
-    ShoppingListItem.create!(
-      shopping_list: list,
-      item: item,
-      quantity: rand(1..5),
-      checked: [ true, false ].sample
-    )
-
-    # 購入履歴も一部生成（50%の確率）
-    if [ true, false ].sample
-      PurchaseHistory.create!(
-        user: user,
-        item: item,
-        purchased_at: Faker::Date.backward(days: 30)
-      )
-    end
-  end
+  puts "ShoppingList『#{shopping_list.title}』を作成しました"
+else
+  puts "Userが見つかりません"
 end
-
-puts "✅ データ作成完了！"

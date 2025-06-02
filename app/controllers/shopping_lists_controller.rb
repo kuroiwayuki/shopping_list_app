@@ -5,7 +5,6 @@ class ShoppingListsController < ApplicationController
   end
 
   def new
-    binding.pry
     @shopping_list = ShoppingList.new
     @shopping_list.shopping_list_items.build
   end
@@ -18,6 +17,7 @@ class ShoppingListsController < ApplicationController
   end
   def show
     @shopping_list = current_user.shopping_lists.find(params[:id])
+   
   end
 
   def edit
@@ -25,7 +25,6 @@ class ShoppingListsController < ApplicationController
   end
   def update
     @shopping_list = current_user.shopping_lists.find(params[:id])
-    binding.pry
     if @shopping_list.update(shopping_list_params)
       redirect_to shopping_list_path(@shopping_list)
     else
@@ -44,9 +43,10 @@ class ShoppingListsController < ApplicationController
 
   def add_item
     data = shopping_list_params
-
+    
     item_params = data[:shopping_list_items_attributes].values.first
-    @item = Item.find(item_params[:item_id])
+     # エラー起きてるのでチェック必要
+    @item = Item.find_by(name: item_params[:item_name])
     @quantity = item_params[:quantity].to_i
     @recently_purchased = PurchaseHistory.exists?(user: current_user, item: @item)
 
@@ -61,7 +61,7 @@ class ShoppingListsController < ApplicationController
   def shopping_list_params
     params.require(:shopping_list).permit(
       :title,
-      shopping_list_items_attributes: [ :id, :item_id, :quantity, :_destroy ]
+      shopping_list_items_attributes: [ :id, :item_name, :item_id, :quantity, :_destroy ]
     )
   end
 end

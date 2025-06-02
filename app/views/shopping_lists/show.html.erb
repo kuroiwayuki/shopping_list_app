@@ -8,11 +8,19 @@
 
       <% if @shopping_list.shopping_list_items.any? %>
         <ul class="mt-2 list-disc list-inside text-gray-600 dark:text-gray-300">
+          <%# @shopping_listオブジェクトが存在している場合、shopping_list_itemsをインスタンスメソッドで取り出し、itemに入れ（つまり[0]みたいなインデックスによるループ %>
           <% @shopping_list.shopping_list_items.each do |item| %>
-            <li class="flex items-center gap-2">
-        <input type="checkbox" abled <%= "checked" if item.checked %> class="form-checkbox text-blue-600">
-        <span><%= item.item.name %>（数量: <%= item.quantity %>）</span>
-      </li>
+            <li class="flex items-center gap-2" id="shopping_list_item_<%= item.id %>">
+              <%# 各itemに対して、チェックボックス入力画面を表示 パーシャル化後々%>
+              <%= form_with model: item, data: { turbo_frame: "shopping_list_item_#{item.id}" }, class: "inline" do |f| %>
+                <%= f.check_box :checked, {
+                      checked: item.checked,
+                      class: "form-checkbox text-blue-600",
+                      onchange: "this.form.requestSubmit()"
+                    } %>
+              <% end %>
+              <span><%= item.item.name %>（数量: <%= item.quantity %>）</span>
+            </li>
           <% end %>
         </ul>
       <% else %>
@@ -29,5 +37,6 @@
       <%= link_to '戻る', shopping_lists_path,
           class: "px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80" %>
     </div>
+    
   </div>
 </div>

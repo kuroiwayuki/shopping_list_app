@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :shopping_lists do
     post :add_item, on: :collection
   end
+  resources :shopping_list_items, only: [:update]
   resources :items do
     collection do
       get :autocomplete
