@@ -11,11 +11,11 @@
     <div data-controller="item-autocomplete">
       <%= item_fields.label :item_id, "商品名" %>
       <input type="text"
-             data-item-autocomplete-target="input"
-             data-action="input->item-autocomplete#search"
-             placeholder="商品名を入力"
-             name="shopping_list[shopping_list_items_attributes][0][item_name]"
-             class="border rounded p-1 w-full" />
+       data-item-autocomplete-target="input"
+       data-action="input->item-autocomplete#search"
+       placeholder="商品名を入力"
+       name="shopping_list[shopping_list_items][item_name]"
+       class="border rounded p-1 w-full" />
 
       <%= item_fields.hidden_field :item_id, data: { item_autocomplete_target: "hidden" } %>
 

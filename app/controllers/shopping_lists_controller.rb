@@ -41,11 +41,13 @@ class ShoppingListsController < ApplicationController
   end
 
   def add_item
+    
     data = shopping_list_params
-
-    item_params = data[:shopping_list_items_attributes].values.first
+    
+    item_params = data[:shopping_list_items]
     # エラー起きてるのでチェック必要
     @item = Item.find_by(name: item_params[:item_name])
+    binding.pry
     @quantity = item_params[:quantity].to_i
     @recently_purchased = PurchaseHistory.exists?(user: current_user, item: @item)
 
@@ -58,9 +60,7 @@ class ShoppingListsController < ApplicationController
   private
 
   def shopping_list_params
-    params.require(:shopping_list).permit(
-      :title,
-      shopping_list_items_attributes: [ :id, :item_name, :item_id, :quantity, :_destroy ]
-    )
+    params.require(:shopping_list).permit(:title, shopping_list_items: [:id, :item_name, :item_id, :quantity, :_destroy ])
+
   end
 end

@@ -23,6 +23,7 @@ export default class extends Controller {
         .then(data => {
           this.resultsTarget.innerHTML = ""
           data.forEach(item => {
+            console.log(item,"💩💩")
             const li = document.createElement("li")
             li.textContent = item.name
             li.classList.add("cursor-pointer", "hover:bg-gray-200", "p-2")
