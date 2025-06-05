@@ -15,7 +15,6 @@ class ShoppingListsController < ApplicationController
     if @shopping_list.save
       # 子要素を手動で保存
       shopping_list_items_params.each do |item_data|
-        
         @shopping_list.shopping_list_items.create(
           item_id: item_data[:item_id],
           quantity: item_data[:quantity]

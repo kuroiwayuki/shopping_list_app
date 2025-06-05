@@ -2,7 +2,6 @@ class PurchaseHistoriesController < ApplicationController
   def index
     binding.pry
         @purchase_histories = current_user.purchase_histories.all
-
   end
 
   def create
@@ -11,7 +10,7 @@ class PurchaseHistoriesController < ApplicationController
     ActiveRecord::Base.transaction do
       user_shopping_list.shopping_list_items.each do |item|
         history = current_user.purchase_histories.build(
-          item_id: item.item_id, 
+          item_id: item.item_id,
           purchased_at: Time.current
         )
 
