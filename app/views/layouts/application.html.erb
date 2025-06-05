@@ -24,6 +24,11 @@
   <%= render "shared/before_login_header" %>
 <% end %>
 
+<% if flash[:notice] %>
+<% binding.pry%>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
   <main class="flex-1 py-12 bg-blue-50">
     <%= yield %>
   </main>

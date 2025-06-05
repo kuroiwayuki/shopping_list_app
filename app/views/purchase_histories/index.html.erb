@@ -1,0 +1,14 @@
+<section class="container px-4 mx-auto pt-10 pb-[120px]">
+  <div class="bg-white border-l-4 border-blue-500 shadow p-4 mb-6 rounded dark:bg-gray-800 dark:border-blue-400">
+  <h2 class="text-xl font-zenKurenaido text-gray-800 dark:text-white">
+    📝 買い物リスト一覧
+  </h2>
+  </div>
+
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <%# _shopping_list.html.erbでループ表示 %>
+   <%= render @purchase_histories %>
+  </div>
+</section>
+
