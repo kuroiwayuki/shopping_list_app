@@ -63,6 +63,6 @@ group :test do
 end
 
 gem "tailwindcss-rails"
-gem "tailwindcss-ruby", "3.4.17"
+gem "tailwindcss-ruby", "4.1.8"
 gem "inline_svg"
 gem "bcrypt", "~> 3.1.7"
