@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create]
   resources :shopping_lists do
     post :add_item, on: :collection
+    patch :update_status, on: :member
   end
+  
   resources :shopping_list_items, only: [ :update ]
   resources :purchase_histories
   resources :items do

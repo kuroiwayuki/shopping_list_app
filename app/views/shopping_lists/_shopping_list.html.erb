@@ -10,6 +10,11 @@
             <li><%= sli.item.name %>（<%= sli.quantity %><%= sli.item.unit %>）</li>
           <% end %>
         </ul>
+        <%= form_with model: shopping_list, url: update_status_shopping_list_path(shopping_list), method: :patch, local: true do |f| %>
+  <%= f.select :status, ShoppingList.statuses_i18n.invert.to_a %>
+  <%= f.submit "更新" %>
+<% end %>
+
 
         <div class="flex justify-end gap-3">
           <%= link_to "詳細", shopping_list_path(shopping_list) , class: "text-blue-600 hover:underline text-sm" %>

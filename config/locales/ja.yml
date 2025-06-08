@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    attributes:
+      shopping_list:
+        status:
+          incomplete: "未完了"
+          complete: "完了"
+  time:
+    formats:
+      short: "%Y/%m/%d %H:%M"

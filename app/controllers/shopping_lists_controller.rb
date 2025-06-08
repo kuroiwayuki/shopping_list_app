@@ -69,7 +69,23 @@ class ShoppingListsController < ApplicationController
     end
   end
 
-
+  def update_status
+    shopping_list = current_user.shopping_lists.find(params[:id])
+    ActiveRecord::Base.transaction do
+      shopping_list.update!(status: params[:shopping_list][:status])
+  
+      if shopping_list.complete?
+        shopping_list.create_purchased_history!(purchased_at: Time.current)
+      else
+        shopping_list.purchased_history&.destroy!
+      end
+    end
+    redirect_to shopping_list_path(shopping_list), notice: "更新しました"
+  rescue => e
+    redirect_to shopping_list_path(shopping_list), alert: "更新に失敗しました: #{e.message}"
+  end
+  
+  
   private
 
   def shopping_list_params
