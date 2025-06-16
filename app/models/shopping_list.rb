@@ -16,6 +16,6 @@ class ShoppingList < ApplicationRecord
   end
 
   def status_i18n
-    I18n.t("activerecord.attributes.shopping_list.status.#{status}")
+    I18n.t("activerecord.attributes.shopping_list.status.#{status}") 
   end
 end
